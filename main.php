@@ -26,7 +26,7 @@
     <body>
 	<h1>Main</h1>
 	<h3>Well come to my LCMS : Admin <?php echo $_SESSION['admin']; ?></h3> 
-	<div id="layout" style="width: 100%; height: 500px;"></div>
+	<div id="layout" style="width: 100%; height: 1200px;"></div>
     </body>
 </html>
    
