@@ -28,10 +28,10 @@
 	    },
 	    toolbar:{
 		name:'toolbar',
-		items:[ { type: 'button', id: 'append', caption: 'Append', icon: 'w2ui-icon-plus' }],
+		items:[ { type: 'button', id: 'add', caption: 'Add', icon: 'w2ui-icon-plus' }],
 		onClick:function(event){
 		    switch (event.target){
-			case 'append':
+			case 'add':
 				popup(w2ui.fuser,w2ui.layPopup);  
 			 break;
 		    }
@@ -127,19 +127,12 @@ var fuser={
                 { field: 'last_name', type: 'text', required: true },
                 { field: 'email', type: 'email' },
 	    ],
-	    record: { 
-		first_name    : 'sokha',
-		last_name     : 'visal',
-		email         : 'jdoe@email.com'
-	    },
-	    postData: {
-		param1 : 'value1', 
-		param2 : 'value2'
-	    },
+	   
 	     actions: {
                 "save": function (target, data) { 
-		    console.log(target);
 		    this.save();
+		   
+			console.log(data);
 		    
 		},
                 "reset": function () { this.clear(); },
