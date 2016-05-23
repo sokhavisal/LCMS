@@ -9,7 +9,7 @@
 	}
     }
     $_SESSION['last_activity'] = time(); 
-    $_SESSION["time_out"] = 10*60*60;
+    $_SESSION["time_out"] = 60;
 ?>
 <html>
     <head>

@@ -2,17 +2,26 @@
 require_once 'constant/constant.php';
 require_once 'class/cls_connection.php';
 $conn= new Database();
-$conn->query('select * from user');
-$result = $conn ->resultset();
-$dataobj['total']= $conn->rowCount();
+$limit = $_POST['limit'];
+$offset = $_POST['offset'];
+
+$conn->query("SELECT * from user LIMIT {$limit} OFFSET {$offset}");
+
+$result = $conn->resultset();
+$conn->query("SELECT COUNT(*) AS NUM FROM user;");
+$count = $conn->resultset();
+
+$dataobj['total']= $count[0]['NUM'] + 2;
     for  ($i=0;$i<count($result);$i++) {
 	
 	$row= $result[$i];
 	$dataobj['records'][]=(array(
 		    'recid' => $row['id'],
-		    'fname' => $row['name'],
+		    'fname' => $row['name'],	    
 	));
     }
+    $dataobj['records'][]=(array('summary'=>true,'lname'=>'<span style="float: right;">Total</span>','fname'=>'500','email'=>'<span style="float: right;">Mean Date</span>','sdate'=>'1/1/2012'));
+    $dataobj['records'][]=(array('summary'=>true,'lname'=>'<span style="float: right;">Total</span>','fname'=>'500','email'=>'<span style="float: right;">Mean Date</span>','sdate'=>'1/1/2012'));
     echo json_encode($dataobj);
 
 

@@ -22,6 +22,7 @@
     var gmain={
 	grid:{
 	    name:'gmain',
+	    
 	    show:{
 		toolbar: true,
 		footer: true,
@@ -71,6 +72,8 @@
     var gpreview={
 	    grid:{
 		name:'gpreview',
+		limit: 100,
+		total:200,
 		url:'data.php',
 		show:{
 		    toolbar:true,
