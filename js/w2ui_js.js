@@ -7,7 +7,21 @@
 		    {type:'top',size:100,style:pstyle}, // VALUE 1 OF PANEL IS TOP  
 		    {type:'main',style:pstyle}, // VALUE 1 OF PANEL IS LEFT
 		    {type:'preview',size:700,hidden:false,style:pstyle,resize:true}, // VALUE 1 OF PANEL IS MAIN
-		    {type:'right',size:500,style:pstyle}, // VALUE 1 OF PANEL IS RIGHT
+		    {type:'right',size:500,style:pstyle,
+			tabs:{
+			    active: 'tab1',
+			    tabs: [
+						{ id: 'tab1', caption: 'customer', },
+						{ id: 'tab2', caption: 'Employees' },
+						{ id: 'tab3', caption: 'Suppliers' },
+						{ id: 'tab4', caption: 'Orderitem' }
+				],
+					onClick: function (target, data) {
+					    func_layoutClick(target, $(data.subItem).attr('id'));
+					}   
+			}	    
+	    
+		    } // VALUE 1 OF PANEL IS RIGHT
 		],
 	    }
 	};
@@ -87,6 +101,13 @@
 		    { field: 'email', caption: 'Email', size: '40%' },
 		    { field: 'sdate', caption: 'Start Date', size: '120px' },
 		],
+		searchs:[
+		    { field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
+		    { field: 'lname', caption: 'Last Name', size: '30%', sortable: true },
+		    { field: 'fname', caption: 'First Name', size: '30%', sortable: true },
+		    { field: 'email', caption: 'Email', size: '40%' },
+		    { field: 'sdate', caption: 'Start Date', size: '120px' },
+		],
 		records:[],
 		
 	    }
@@ -150,12 +171,32 @@ $(function () {
     w2ui['mainlayout'].load('top','header.php');
     // gride initial 
     w2ui['mainlayout'].content('main',$().w2grid(gmain.grid));
-    w2ui['mainlayout'].content('preview',$().w2grid(gpreview.grid));
+    //w2ui['mainlayout'].content('preview',$().w2grid(gpreview.grid));
+    
     $().w2layout(layPopup);
     $().w2form(fuser.form);
-    
+    $().w2grid(gpreview.grid);
+    func_layoutClick('tab1','');
 });
-
+function func_layoutClick(target,tID) {
+	//月次目標
+	if (target == 'tab1'){
+		w2ui['mainlayout'].content('right',w2ui.gpreview);
+	//分類目標
+	} else if (target == 'tab2'){
+		w2ui['mainlayout'].content('right','<div class=""><h3>User</h3></div>');
+	//システム設定
+	} else if (target == 'tab3'){
+		//w2ui['mainlayout'].content('right',$().w2grid(gpreview.grid));
+	//仕入先マスタ
+        }
+        else if (target == 'tab4')
+        {
+       // w2ui['mainlayout'].content('right', $().w2grid(gpreview.grid));
+	} else {
+		this.owner.content('right','test');
+	}
+}
 // -------- function form popup --------- //
 function popup(obj,lobj) {
     w2popup.open({
