@@ -18,9 +18,11 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
 	<!--Internal link  -->
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 	<script type="text/javascript" src="js/w2ui_js.js"></script>
 	<script type="text/javascript" src="js/w2ui-1.4.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/w2ui-1.4.3.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	
     </head>
     <body>

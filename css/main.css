@@ -1,0 +1,17 @@
+.fa.fa-question-circle.fa-2x {   
+    color: red;   
+}
+.fa .fa-plus{
+    color:#c4fff1;
+	
+}
+.w2ui-toolbar table.w2ui-button .w2ui-tb-caption {
+    color: #FFF;
+    padding: 0 4px 0 2px;
+}
+.w2ui-toolbar table.w2ui-button .w2ui-tb-image > span {
+    font-size: 15px;
+    margin-top: 3px;
+    display: block;
+    color: #fff;
+}

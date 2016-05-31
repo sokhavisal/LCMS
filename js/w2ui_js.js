@@ -1,24 +1,29 @@
 
     var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;';
+    var toolstyle= 'background-color:#6a9eb5;color:#FFF;';
     var mainlayout={
 	    layout:{
 		name:'mainlayout',
 		panels:[
-		    {type:'top',size:100,style:pstyle}, // VALUE 1 OF PANEL IS TOP  
-		    {type:'main',style:pstyle}, // VALUE 1 OF PANEL IS LEFT
-		    {type:'preview',size:700,hidden:false,style:pstyle,resize:true}, // VALUE 1 OF PANEL IS MAIN
-		    {type:'right',size:500,style:pstyle,
+		    {type:'top',size:100,style:pstyle,resizable: true}, // VALUE 1 OF PANEL IS TOP  
+		    {type:'main',style:pstyle,resizable: true}, // VALUE 1 OF PANEL IS LEFT
+		    {type:'preview',size:700,hidden:false,style:pstyle,resize:true,resizable: true}, // VALUE 1 OF PANEL IS MAIN
+		    {type:'right',size:500,style:pstyle,resizable: true,
 			tabs:{
 			    active: 'tab1',
+			    name:'tabs',
 			    tabs: [
-						{ id: 'tab1', caption: 'customer', },
+						{ id: 'tab1', caption: 'customer' ,style:'color:red;' },
 						{ id: 'tab2', caption: 'Employees' },
-						{ id: 'tab3', caption: 'Suppliers' },
-						{ id: 'tab4', caption: 'Orderitem' }
+						{ id: 'tab3', caption: 'Suppliers'},
+						{ id: 'tab4', caption: 'Orderitem'}
 				],
-					onClick: function (target, data) {
+					onClick: function (target, data) { 
+					    w2ui['mainlayout_right_tabs'].set('tab3', { caption: ''+ new_data() +'' });
+					    w2ui['mainlayout_right_tabs'].refresh();
 					    func_layoutClick(target, $(data.subItem).attr('id'));
-					}   
+						    // console.log(mainlayout.tabs);	   
+					} 
 			}	    
 	    
 		    } // VALUE 1 OF PANEL IS RIGHT
@@ -36,18 +41,29 @@
     var gmain={
 	grid:{
 	    name:'gmain',
-	    
+	    multiSearch: true,
 	    show:{
 		toolbar: true,
 		footer: true,
 	    },
 	    toolbar:{
 		name:'toolbar',
-		items:[ { type: 'button', id: 'add', caption: 'Add', icon: 'w2ui-icon-plus' }],
+		style:toolstyle ,
+		items:[ { type: 'button', id: 'add', caption: 'Add',icon:'fa fa-plus'}],
 		onClick:function(event){
 		    switch (event.target){
 			case 'add':
-				popup(w2ui.fuser,w2ui.layPopup);  
+			   w2confirm('<h3>are you ok <i class="fa fa-question-circle fa-2x" aria-hidden="true"> </i></h3>  ',function(btn){
+			       console.log(btn);
+			       if(btn=='Yes'){
+			       popup(w2ui.fuser,w2ui.layPopup);
+			       }else{
+				   if(btn=='No'){
+				       this.close();
+				   }
+			       }
+			   });
+			    
 			 break;
 		    }
 		    
@@ -60,6 +76,13 @@
             { field: 'email', caption: 'Email', size: '40%' },
             { field: 'sdate', caption: 'Start Date', size: '120px' },
 	],
+	searches: [
+            { field: 'recid', caption: 'ID ', type: 'int' },
+            { field: 'lname', caption: 'Last Name', type: 'text' },
+            { field: 'fname', caption: 'First Name', type: 'text' },
+            { field: 'email', caption: 'Email', type: 'list', options: { items: ['peter@gmail.com', 'jim@gmail.com', 'jdoe@gmail.com']} },
+            { field: 'sdate', caption: 'Start Date', type: 'date' }
+        ],
 	    records:[
 	    { recid: 1, fname: 'Jane', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
             { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
@@ -88,9 +111,10 @@
 		name:'gpreview',
 		limit: 100,
 		total:200,
-		url:'data.php',
+		//url:'data.php',
+		multiSearch: true,
 		show:{
-		    toolbar:true,
+		   // toolbar:true,
 		    footer:true,
 		    
 		},
@@ -101,13 +125,14 @@
 		    { field: 'email', caption: 'Email', size: '40%' },
 		    { field: 'sdate', caption: 'Start Date', size: '120px' },
 		],
-		searchs:[
-		    { field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
-		    { field: 'lname', caption: 'Last Name', size: '30%', sortable: true },
-		    { field: 'fname', caption: 'First Name', size: '30%', sortable: true },
-		    { field: 'email', caption: 'Email', size: '40%' },
-		    { field: 'sdate', caption: 'Start Date', size: '120px' },
-		],
+		
+        searches: [
+            { field: 'recid', caption: 'ID ', type: 'int' },
+            { field: 'lname', caption: 'Last Name', type: 'text' },
+            { field: 'fname', caption: 'First Name', type: 'text' },
+            { field: 'email', caption: 'Email', type: 'list', options: { items: ['peter@gmail.com', 'jim@gmail.com', 'jdoe@gmail.com']} },
+            { field: 'sdate', caption: 'Start Date', type: 'date' }
+        ],
 		records:[],
 		
 	    }
@@ -121,36 +146,26 @@ var fuser={
 	    name:'fuser',
 	    header:'User Form',
 	    url:'comm.php',
-	     formHTML: 
-                '<div class="w2ui-page page-0">'+
-                '    <div class="w2ui-field">'+
-                '        <label>First Name:</label>'+
-                '        <div>'+
-                '           <input name="first_name" type="text" maxlength="100" style="width: 250px"/>'+
-                '        </div>'+
-                '    </div>'+
-                '    <div class="w2ui-field">'+
-                '        <label>Last Name:</label>'+
-                '        <div>'+
-                '            <input name="last_name" type="text" maxlength="100" style="width: 250px"/>'+
-                '        </div>'+
-                '    </div>'+
-                '    <div class="w2ui-field">'+
-                '        <label>Email:</label>'+
-                '        <div>'+
-                '            <input name="email" type="text" style="width: 250px"/>'+
-                '        </div>'+
-                '    </div>'+
-                '</div>'+
-                '<div class="w2ui-buttons">'+
-                '    <button class="btn" name="reset">Reset</button>'+
-                '    <button class="btn" name="save">Save</button>'+
-                '</div>',
-	    fields : [
-		{ field: 'first_name', type: 'text', required: true },
-                { field: 'last_name', type: 'text', required: true },
-                { field: 'email', type: 'email' },
-	    ],
+	     
+	    
+        fields : [
+            { field: 'first_name', type: 'text', required: true },
+            { field: 'last_name',  type: 'text', required: true },
+            { field: 'comments',   type: 'text'},
+            { field: 'address1', type: 'text', required: true },
+            { field: 'address2', type: 'text' },
+            { field: 'city', type: 'text', required: true },
+            { field: 'state', type: 'text', required: true },
+            { field: 'zip', type: 'int', required: true },
+            { field: 'short_bio', type: 'text' },
+            { field: 'talk_name', type: 'text', required: true },
+            { field: 'description', type: 'text' }
+        ],
+        tabs: [
+            { id: 'tab1', caption: 'General' },
+            { id: 'tab2', caption: 'Address'},
+            { id: 'tab3', caption: 'About' }
+        ],
 	   
 	     actions: {
                 "save": function (target, data) { 
@@ -163,7 +178,29 @@ var fuser={
             } 
 	}    
 };
+var test_tab={
+    tabs:{
+	name: 'tabs',
+	active: 'tab1',
+	tabs: [
+	    { id: 'tab1', caption: 'Tab 1' },
+	    { id: 'tab2', caption: 'Tab 2' },
+	    { id: 'tab3', caption: 'Tab 3' },
+	    { id: 'tab4', caption: 'Tab 4' }
+	],
+	onClick: function(event){
+	    if(event.target=='tab1'){
+	     w2ui.tabs.set('tab3', { caption: ''+ new_data() +'' });
+	      w2ui.tabs.refresh();
+	    }
+	}
+    }
     
+};
+ function new_data(){
+     var newdata ='10';
+     return newdata;
+ }   
 // ------- function create layout ------ //
 $(function () {
   $('#layout').w2layout(mainlayout.layout);
@@ -172,22 +209,28 @@ $(function () {
     // gride initial 
     w2ui['mainlayout'].content('main',$().w2grid(gmain.grid));
     //w2ui['mainlayout'].content('preview',$().w2grid(gpreview.grid));
-    
+   //  $().w2tabs(test_tab.tabs);
     $().w2layout(layPopup);
     $().w2form(fuser.form);
     $().w2grid(gpreview.grid);
+    $().w2tabs(test_tab.tabs);
+   // w2ui['mainlayout tabs'].w2tabs(tabs.tabs);
     func_layoutClick('tab1','');
+    w2ui['mainlayout_right_tabs'].set('tab3', { caption: ''+ new_data() +'' });
+    w2ui['mainlayout_right_tabs'].refresh();
 });
 function func_layoutClick(target,tID) {
 	//月次目標
-	if (target == 'tab1'){
+	if (target == 'tab1'){	
 		w2ui['mainlayout'].content('right',w2ui.gpreview);
 	//分類目標
 	} else if (target == 'tab2'){
 		w2ui['mainlayout'].content('right','<div class=""><h3>User</h3></div>');
 	//システム設定
 	} else if (target == 'tab3'){
-		//w2ui['mainlayout'].content('right',$().w2grid(gpreview.grid));
+		
+		w2ui['mainlayout'].content('right',w2ui.tabs);
+		
 	//仕入先マスタ
         }
         else if (target == 'tab4')
@@ -203,8 +246,8 @@ function popup(obj,lobj) {
         title   : 'Form in a Popup',
         body    : '<div id="form" style="width: 100%; height: 100%;"></div>',
         style   : 'padding: 15px 0px 0px 0px',
-        width   : 500,
-        height  : 300, 
+        width   : 700,
+        height  : 700, 
         showMax : true,
 	overflow  : 'hidden',
         color     : '#333',
@@ -226,3 +269,4 @@ function popup(obj,lobj) {
     });
 }
 // -------- function form popup --------- //
+
