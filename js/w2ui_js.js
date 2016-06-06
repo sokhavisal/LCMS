@@ -145,8 +145,61 @@ var fuser={
 	form:{
 	    name:'fuser',
 	    header:'User Form',
-	    url:'comm.php',
-	     
+	    formHTML:'<div id="form" style="width: 750px;">'+
+		    '<div class="w2ui-page page-0">'+
+		    '<div class="w2ui-field">'+
+		    '<label>First Name:</label>'+
+          '<div>'+
+                '<input name="first_name" type="text" maxlength="100" size="60"/>'+
+            '</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>Last Name:</label>'+
+			'<div>'+
+			'<input name="last_name" type="text" maxlength="100" size="60"/>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>Comments:</label>'+
+			'<div>'+
+			'<textarea name="comments" type="text" style="width: 100%; height: 80px; resize: none"></textarea>'+
+			'</div>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-page page-1">'+
+			'<div class="w2ui-field">'+
+			'<label>Address:</label>'+
+			'<div>'+
+			'<input name="address1" type="text" maxlength="100" style="width: 100%"/>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>Line 2:</label>'+
+			'<div>'+
+			'<input name="address2" type="text" maxlength="100" style="width: 100%"/>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>City:</label>'+
+			'<div>'+
+			'<input name="city" type="text" maxlength="50" size="25"/>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>State:</label>'+
+			'<div>'+
+			'<input name="state" type="text" maxlength="2" size="2"/>'+
+			'</div>'+
+			'</div>'+
+			'<div class="w2ui-field">'+
+			'<label>Zip:</label>'+
+			'<div>'+
+			'<input name="zip" type="text" maxlength="10" size="10"/>'+
+			'</div>'+
+			'</div>'+
+			'</div>',
+       
+		    
 	    
         fields : [
             { field: 'first_name', type: 'text', required: true },
@@ -178,6 +231,102 @@ var fuser={
             } 
 	}    
 };
+var frmEditLinkError = {
+    name: 'frmEditLinkError',
+    // header: 'Edit linkError',
+    formHTML: 
+	    '<div class="w2ui-page page-0">'+ 	   
+	   '<div class="" style="width:350px;float:left; height:480px; padding:5px;" > ' +
+	   '<br>'+
+	   '<br>'+
+		   
+	    '	<div class="w2ui-field" style="margin-left:5px;">'+		    
+		    '<div style="float: left;">'+
+			'<div>&nbsp;Link Item URL:</div>'+
+			'<input id="ItemURL"   name="ItemURL" type="text"  style="width: 320px; height:30px; resize: none;margin:5px;" spellcheck=false /><input  id="btngetvalue" type="button" name="btnGetvalue" value="Get Value" style="float:right;margin:3px;" onclick="return func_getValue();"> </div>'+
+	      '	</div>'+
+	       
+	    '	<div class="w2ui-field" style="margin-left:5px;">'+		    
+		    '<div style="float: left;">'+
+			'<div>&nbsp;Link Image URL:</div>'+
+			'<textarea id="ImageURL" name="ImageURL" type="text"  style="width: 320px; height:60px; resize: none;margin:5px;" spellcheck=false></textarea>'+
+		    '</div>'+
+	      '	</div>'+	      	       
+	    '	<div class="w2ui-field" style="margin-left:5px;">'+		    
+		    '<div style="float: left;">'+
+		    '<div>&nbsp;Title Item:</div>'+
+		    '<textarea id="ItemTitle" name="ItemTitle" type="text"  style="width:320px; height:130px; resize: none;margin:5px;" spellcheck=false></textarea>'+
+		'</div>'+
+	      '	</div>'+	      
+	    '	<div class="w2ui-field" style="margin-left:5px;">'+		    
+		    '<div style="float: left;">'+
+			'<div>&nbsp;Price:</div>'+
+			'<textarea id="ItemPrice" name="ItemPrice" type="text"  style="width: 320px; height:60px; resize: none;margin:5px;" spellcheck=false></textarea>'+
+		    '</div>'+	      
+	    '	</div>'+
+	    '<div class="w2ui-label" style="width:200px; text-align:left; margin:14px;"><input id="CheckBackUp" name="CheckBackUp" type="checkbox" value="true" checked  onClick="" /"> Backup before upload </div>'+
+	      '	<div class="w2ui-field">'+
+			'<div style="float: left;"><textarea id="Id" name="Id" type="text"  style="width: 50px; height:30px; resize: none;margin:5px; display:none;" spellcheck=false  ></textarea></div>'+
+			  ' <input type ="button" name="btnGenerate" value="Generate" style="float:right;margin:5px;" onclick="func_generate();">'+			  
+	    '	</div>'+
+
+		   '</div>'+
+		
+	    '<div style="width:320px;float:left; height:480px; padding:5px;" > ' +
+	   
+	    '	 <div class="w2ui-field" >'+  
+	    '	 <div style="float:right;">'+
+		    '<div  style="margin:10px;" >Div Link Item Error: </div>'+
+		    '<textarea  id="txtlinkerror" name="Divlinkerror" type="text" style="width:315px; height: 200px; float:left; resize: none; background-color:#FFF; color:black; " readonly></textarea>'+
+		'</div>'+
+	    '	</div>'+
+	   
+	    '	<div class="w2ui-field" >'+  	     
+		    '<div style="float:right;">'+
+			'<div style="margin:10px;">New Div Link Item Generate: </div>'+
+			'<textarea  id="Divlinkgenerate" name="Divlinkgenerate" type="text"  style="width: 315px; height:200px;margine:5px; float:left; resize: none "   onkeyup="NewDivGenerate(this)"></textarea>'+
+		    '</div>'+
+	      '	</div>'+
+	   
+		   '</div>'+
+		
+		    '<div style="width:340px;float:left; height:480px; padding:5px;" > ' +
+			'<div style="margin:10px;">Preview HTML </div>'+
+			     '<div id="PreviewHTML"  name="HTML" style="width:650px; border:1px solid #CCCCCC; height:430px;float:left;padding:5px;background-color:#FFF;">'+			    
+		             '</div>'+
+		     '</div>'+
+	     '<div style="clear:both;"></div>'+
+	'</div>'+
+	
+       
+       '<div class="w2ui-buttons" style="height:70px;">'+
+	'	<input type="button" value="Upload" name="Save" onclick="func_Upload();" >'+
+       '	<input type="button" value="Cancel" name="Cancel">'+
+	'       <input type="button" style="float:left;margin:0px 0px 0px 25px;" value="Download" name="Download" onclick="return func_Download();">'+
+        '</div>',
+		//'</div>',
+    fields: [
+        { name: 'Id',		    type: 'text'},
+	{ name: 'Divlinkgenerate', type: 'text'},
+        { name: 'Divlinkerror',	    type: 'text'},
+        { name: 'ItemURL',	    type: 'text' },
+        { name: 'ImageURL',	    type: 'text'},
+        { name: 'ItemTitle',        type: 'text' },
+        { name: 'ItemPrice',	    type: 'text' },
+	{ name: 'CheckBackUp',	    type: 'bit'},
+	 //{ name: 'HTML',	    type: 'text' }
+    ],
+	  actions: {
+	      Cancel: function (){
+		  this.clear();
+		  w2ui['lErrorDetail'].toggle('right', window.instant);
+	  }
+	 
+	  
+	  
+      }
+		
+};
 var test_tab={
     tabs:{
 	name: 'tabs',
@@ -198,9 +347,21 @@ var test_tab={
     
 };
  function new_data(){
-     var newdata ='10';
+     var newdata ='<i class="fa fa-user fa-2x" aria-hidden="true"></i> <span class="badge">42</span>';
      return newdata;
- }   
+ }
+  function new_data1(){
+     var newdata1 ='<i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> <span class="badge">5</span>';
+     return newdata1;
+ }
+ function new_data2(){
+     var newdata2 ='<i class="fa fa-tachometer fa-2x" aria-hidden="true"></i> <span class="badge">2</span>';
+     return newdata2;
+ }
+  function new_data3(){
+     var newdata3 ='<i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="badge">12</span>';
+     return newdata3;
+ }
 // ------- function create layout ------ //
 $(function () {
   $('#layout').w2layout(mainlayout.layout);
@@ -212,13 +373,21 @@ $(function () {
    //  $().w2tabs(test_tab.tabs);
     $().w2layout(layPopup);
     $().w2form(fuser.form);
+    $().w2form(frmEditLinkError);
     $().w2grid(gpreview.grid);
     $().w2tabs(test_tab.tabs);
    // w2ui['mainlayout tabs'].w2tabs(tabs.tabs);
     func_layoutClick('tab1','');
-    w2ui['mainlayout_right_tabs'].set('tab3', { caption: ''+ new_data() +'' });
-    w2ui['mainlayout_right_tabs'].refresh();
+    func_notification();
 });
+function func_notification(){
+    w2ui['mainlayout_right_tabs'].set('tab1', { caption: ''+ new_data() +'' });
+    w2ui['mainlayout_right_tabs'].set('tab2', { caption: ''+ new_data1() +'' });
+    w2ui['mainlayout_right_tabs'].set('tab3', { caption: ''+ new_data2() +'' });
+    w2ui['mainlayout_right_tabs'].set('tab4', { caption: ''+ new_data3() +'' });
+    w2ui['mainlayout_right_tabs'].refresh();
+    
+}
 function func_layoutClick(target,tID) {
 	//月次目標
 	if (target == 'tab1'){	

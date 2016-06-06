@@ -15,3 +15,17 @@
     display: block;
     color: #fff;
 }
+.fa.fa-user.fa-2x,.fa.fa-map-marker.fa-2x,.fa.fa-tachometer.fa-2x ,.fa.fa-home.fa-2x{
+    display: inline-flex;
+    vertical-align: middle;
+    color:#f3b3ac;
+}
+.badge{
+   background-color:#F28286;
+}
+tab.active {
+    color: #000;
+    background-color: #7eafc6;
+    border: 1px solid silver;
+    border-bottom: 1px solid transparent;
+}

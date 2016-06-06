@@ -22,6 +22,7 @@
 	<script type="text/javascript" src="js/w2ui_js.js"></script>
 	<script type="text/javascript" src="js/w2ui-1.4.3.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/w2ui-1.4.3.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	
     </head>
