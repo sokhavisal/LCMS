@@ -70,7 +70,8 @@ class Database{
     // start use transection 
     public function beginTransaction(){
 	return $this->dbh->beginTransaction();
-    }
+    } 
+    
     public function endTransaction(){
 	return $this->dbh->commit();
     }
@@ -81,3 +82,4 @@ class Database{
 	return $this->stmt->debugDumpParams();
     }
 }
+		
